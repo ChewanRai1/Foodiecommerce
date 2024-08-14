@@ -49,6 +49,11 @@ dependencies:
   permission_handler: ^11.3.1
   hive_flutter: ^1.1.0
 
+  mockito: ^5.4.4
+  all_sensors2: ^1.0.1
+  flutter_rating_bar: ^4.0.0
+  riverpod: ^2.5.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -1,12 +1,14 @@
 import 'package:flaviourfleet/features/dashboard/presentation/navigator/dashboard_navigator.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final homeViewModelProvider = StateNotifierProvider<HomeViewModel, void>((ref) {
-  final navigator = ref.read(homeViewNavigatorProvider);
-  return HomeViewModel(navigator);
+final dashboardViewModelProvider =
+    StateNotifierProvider<DashboardViewModel, void>((ref) {
+  final navigator = ref.read(dashboardViewNavigatorProvider);
+  return DashboardViewModel(navigator);
 });
 
-class HomeViewModel extends StateNotifier<void> {
-  HomeViewModel(this.navigator) : super(null);
-  final HomeNavigator navigator;
+class DashboardViewModel extends StateNotifier<void> {
+  DashboardViewModel(this.navigator) : super(null);
+
+  DashboardViewNavigator navigator;
 }

@@ -1,3 +1,5 @@
+// Data layer
+
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
@@ -14,22 +16,32 @@ final authLocalRepositoryProvider = Provider<IAuthRepository>((ref) {
 });
 
 class AuthLocalRepository implements IAuthRepository {
-  final AuthLocalDataSource _authLocalDataSource;
-
-  AuthLocalRepository(this._authLocalDataSource);
+  final AuthLocalDataSource authLocalDataSource;
+  AuthLocalRepository(this.authLocalDataSource);
 
   @override
-  Future<Either<Failure, bool>> loginStudent(String email, String password) {
-    return _authLocalDataSource.loginStudent(email, password);
+  Future<Either<Failure, bool>> loginUser(String email, String password) {
+    return authLocalDataSource.loginUser(email, password);
   }
 
   @override
-  Future<Either<Failure, bool>> registerStudent(AuthEntity student) {
-    return _authLocalDataSource.registerStudent(student);
+  Future<Either<Failure, bool>> registerUser(AuthEntity user) {
+    return authLocalDataSource.registerUser(user);
   }
 
   @override
   Future<Either<Failure, String>> uploadProfilePicture(File file) async {
     return const Right("");
+  }
+
+  @override
+  Future<Either<Failure, AuthEntity>> getCurrentUser() {
+    throw UnimplementedError();
+  }
+  
+  @override
+  Future<Either<Failure, bool>> logout() {
+    // TODO: implement logout
+    throw UnimplementedError();
   }
 }

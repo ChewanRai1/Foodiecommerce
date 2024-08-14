@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class NavigateRoute {
   NavigateRoute._();
 
-  // Open another Screen
+  // open another screen
   static void pushRoute(Widget view) {
     Navigator.push(
       AppNavigator.navigatorKey.currentState!.context,
@@ -12,7 +12,7 @@ class NavigateRoute {
     );
   }
 
-  // Close the current Screen and Open another Screen
+  // close the current screen and open another screen
   static void popAndPushRoute(Widget view) {
     Navigator.pushReplacement(
       AppNavigator.navigatorKey.currentState!.context,
@@ -20,8 +20,8 @@ class NavigateRoute {
     );
   }
 
-  // Just Go Back
-  static void pop() {
+  // just go back
+  static void app() {
     Navigator.pop(
       AppNavigator.navigatorKey.currentState!.context,
     );

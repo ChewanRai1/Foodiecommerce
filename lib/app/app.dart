@@ -1,4 +1,8 @@
+import 'package:flaviourfleet/features/auth/presentation/view/login_view.dart';
+import 'package:flaviourfleet/features/auth/presentation/viewmodel/shake_detection.dart';
 import 'package:flaviourfleet/screen/splash_screen.dart';
+import 'package:flaviourfleet/theme/theme_data.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../features/splash/presentation/view/splash_view.dart';
 import '../screen/login_screen.dart';
@@ -8,17 +12,20 @@ import 'package:flutter/material.dart';
 import 'navigator_key/navigator_key.dart';
 import 'themes/app_theme.dart';
 
-class App extends StatelessWidget {
+class App extends ConsumerWidget {
   const App({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    // ref.read(shakeDetectionServiceProvider);
     return MaterialApp(
-      navigatorKey: AppNavigator.navigatorKey,
+      // theme: getThemeData(),
       debugShowCheckedModeBanner: false,
-      title: 'Flavour Fleet',
-      theme: AppTheme.getApplicationTheme(false),
+      navigatorKey: AppNavigator.navigatorKey,
       home: const SplashView(),
+      routes: {
+        '/login': (context) => const LoginView(),
+      },
     );
   }
 }

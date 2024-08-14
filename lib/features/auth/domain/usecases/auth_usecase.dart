@@ -6,25 +6,29 @@ import 'package:flaviourfleet/features/auth/domain/entity/auth_entity.dart';
 import 'package:flaviourfleet/features/auth/domain/repository/auth_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final authUseCaseProvider = Provider((ref) {
-  return AuthUseCase(ref.read(authRepositoryProvider));
-});
+final authUseCaseProvider = Provider<AuthUsecase>(
+  (ref) => AuthUsecase(
+    authRepository: ref.read(authRepositoryProvider),
+  ),
+);
 
-class AuthUseCase {
-  final IAuthRepository _authRepository;
+class AuthUsecase {
+  final IAuthRepository authRepository;
 
-  AuthUseCase(this._authRepository);
+  AuthUsecase({required this.authRepository});
 
-  Future<Either<Failure, String>> uploadProfilePicture(File file) async {
-    return await _authRepository.uploadProfilePicture(file);
+  //for adding a user
+  Future<Either<Failure, bool>> registerUser(AuthEntity? register) async {
+    return await authRepository.registerUser(register!);
   }
 
-  Future<Either<Failure, bool>> registerStudent(AuthEntity student) async {
-    return await _authRepository.registerStudent(student);
+  Future<Either<Failure, bool>> loginUser(
+      String? email, String? password) async {
+    return await authRepository.loginUser(email!, password!);
   }
 
-  Future<Either<Failure, bool>> loginStudent(
-      String email, String password) async {
-    return await _authRepository.loginStudent(email, password);
+  //for getting all users
+  Future<Either<Failure, AuthEntity>> getCurrentUser() async {
+    return await authRepository.getCurrentUser();
   }
 }

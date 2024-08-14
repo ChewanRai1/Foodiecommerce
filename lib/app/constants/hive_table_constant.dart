@@ -1,12 +1,11 @@
 class HiveTableConstant {
   HiveTableConstant._();
 
-  static const int studentTableId = 0;
-  static const String studentBox = 'studentBox';
+//User table
+  static const int userTableId = 0;
+  static const String userBox = 'userBox';
 
-  static const int batchTableId = 1;
-  static const String batchBox = 'batchBox';
-
-  static const int courseTableId = 2;
-  static const String courseBox = 'courseBox';
+//post table
+  static const int postId = 1;
+  static const String postBox = 'post';
 }

@@ -13,7 +13,7 @@ class RegisterView extends ConsumerStatefulWidget {
 class _RegisterViewState extends ConsumerState<RegisterView> {
   final _key = GlobalKey<FormState>();
 
-  final _fnameController = TextEditingController();
+  final _fullNameController = TextEditingController();
   final _lnameController = TextEditingController();
   final _emailController = TextEditingController();
   final _addressController = TextEditingController();
@@ -39,14 +39,13 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 const SizedBox(height: 20.0),
-                _buildTextField(_fnameController, 'First Name', false),
-                const SizedBox(height: 20.0),
-                _buildTextField(_lnameController, 'Last Name', false),
-                const SizedBox(height: 20.0),
-                _buildTextField(_addressController, 'Address', false),
+                _buildTextField(_fullNameController, 'Full Name', false),
+                // const SizedBox(height: 20.0),
+                // _buildTextField(_lnameController, 'Last Name', false),
+                // const SizedBox(height: 20.0),
+                // _buildTextField(_addressController, 'Address', false),
                 const SizedBox(height: 20.0),
                 _buildTextField(_emailController, 'Email address', false),
-
                 const SizedBox(height: 20.0),
                 _buildPasswordField(_passwordController, 'Password', isObscure,
                     () {
@@ -74,22 +73,18 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                   ),
                   child: const Text('Sign Up'),
                   onPressed: () {
-                        if (_key.currentState!.validate()) {
-                          var student = AuthEntity(
-                            fname: _fnameController.text,
-                            lname: _lnameController.text,
-                            image:
-                                ref.read(authViewModelProvider).imageName ?? '',
-                            address: _addressController.text,
-                            email: _emailController.text,
-                            password: _passwordController.text,
-                          );
+                    if (_key.currentState!.validate()) {
+                      var user = AuthEntity(
+                        fullName: _fullNameController.text,
+                        email: _emailController.text,
+                        password: _passwordController.text,
+                      );
 
-                          ref
-                              .read(authViewModelProvider.notifier)
-                              .registerStudent(student);
-                        }
-                      },
+                      ref
+                          .read(authViewModelProvider.notifier)
+                          .registerUser(user);
+                    }
+                  },
                 ),
                 const SizedBox(height: 20.0),
                 Row(
