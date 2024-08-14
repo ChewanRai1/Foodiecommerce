@@ -1,3 +1,5 @@
+import 'package:dartz/dartz.dart';
+import 'package:flaviourfleet/core/failure/failure.dart';
 import 'package:flaviourfleet/features/auth/domain/entity/auth_entity.dart';
 import 'package:flaviourfleet/features/auth/domain/usecases/auth_usecase.dart';
 import 'package:flaviourfleet/features/auth/presentation/navigator/login_navigator.dart';
@@ -16,7 +18,7 @@ class AuthViewModel extends StateNotifier<AuthState> {
   final AuthUsecase authUseCase;
   final LoginViewNavigator navigator;
 
-  Future<String> registerUser(AuthEntity user) async {
+  Future<Either<Failure, bool>> registerUser(AuthEntity user) async {
     state = state.copyWith(isLoading: true);
     var data = await authUseCase.registerUser(user);
     return data.fold(
@@ -25,11 +27,11 @@ class AuthViewModel extends StateNotifier<AuthState> {
           isLoading: false,
           error: failure.error,
         );
-        return 'error';
+        return Left(failure);
       },
       (success) {
         state = state.copyWith(isLoading: false, error: null);
-        return 'success';
+        return const Right(true);
       },
     );
   }

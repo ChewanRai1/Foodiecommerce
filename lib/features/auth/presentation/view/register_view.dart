@@ -14,9 +14,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
   final _key = GlobalKey<FormState>();
 
   final _fullNameController = TextEditingController();
-  final _lnameController = TextEditingController();
   final _emailController = TextEditingController();
-  final _addressController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
 
@@ -40,10 +38,6 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
               children: <Widget>[
                 const SizedBox(height: 20.0),
                 _buildTextField(_fullNameController, 'Full Name', false),
-                // const SizedBox(height: 20.0),
-                // _buildTextField(_lnameController, 'Last Name', false),
-                // const SizedBox(height: 20.0),
-                // _buildTextField(_addressController, 'Address', false),
                 const SizedBox(height: 20.0),
                 _buildTextField(_emailController, 'Email address', false),
                 const SizedBox(height: 20.0),
@@ -72,7 +66,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                     ),
                   ),
                   child: const Text('Sign Up'),
-                  onPressed: () {
+                  onPressed: () async {
                     if (_key.currentState!.validate()) {
                       var user = AuthEntity(
                         fullName: _fullNameController.text,
@@ -80,9 +74,30 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                         password: _passwordController.text,
                       );
 
-                      ref
+                      final result = await ref
                           .read(authViewModelProvider.notifier)
                           .registerUser(user);
+
+                      result.fold(
+                        (failure) {
+                          // Handle failure
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text(failure.error)),
+                          );
+                        },
+                        (success) {
+                          // Handle success
+                          if (success) {
+                            ref
+                                .read(authViewModelProvider.notifier)
+                                .openLoginView();
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('Registration failed')),
+                            );
+                          }
+                        },
+                      );
                     }
                   },
                 ),

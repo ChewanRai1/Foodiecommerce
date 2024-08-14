@@ -53,6 +53,7 @@ dependencies:
   all_sensors2: ^1.0.1
   flutter_rating_bar: ^4.0.0
   riverpod: ^2.5.1
+  network_image_mock: ^2.1.1
 
 dev_dependencies:
   flutter_test:

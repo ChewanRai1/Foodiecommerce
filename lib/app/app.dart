@@ -1,12 +1,7 @@
 import 'package:flaviourfleet/features/auth/presentation/view/login_view.dart';
-import 'package:flaviourfleet/features/auth/presentation/viewmodel/shake_detection.dart';
-import 'package:flaviourfleet/screen/splash_screen.dart';
 import 'package:flaviourfleet/theme/theme_data.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import '../features/splash/presentation/view/splash_view.dart';
-import '../screen/login_screen.dart';
-import '../screen/register_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'navigator_key/navigator_key.dart';
